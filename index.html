@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>WebSocket Chat</title>
+  </head>
+  <body>
+    <h1>WebSocket Chat</h1>
+    <div id="messages"></div>
+    <form id="message-form" action="#">
+      <label for="message-input">Message:</label><br>
+      <input type="text" id="message-input" name="message" required><br>
+      <!-- add a user name input field -->
+      <label for="name-input">Name:</label>
+      <input type="text" id="name-input" name="name" required>
+      <button type="submit">Send</button>
+    </form>
+    <script>
+      let socket = new WebSocket("ws://192.168.0.104:8080");
+
+// handle incoming WebSocket messages
+socket.onmessage = function(event) {
+  let message = JSON.parse(event.data);
+  let messages = document.getElementById("messages");
+  messages.innerHTML += "<p><strong>" + message.name + ":</strong> " + message.message + "</p>";
+};
+
+// handle form submission
+let form = document.getElementById("message-form");
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
+  let messageInput = document.getElementById("message-input");
+  let nameInput = document.getElementById("name-input"); // get the user name input field
+  let message = {
+    name: nameInput.value, // send the user name along with the message
+    message: messageInput.value
+  };
+  // add the user's own message to the chat
+  let messages = document.getElementById("messages");
+  messages.innerHTML += "<p><strong>You:</strong> " + message.message + "</p>";
+  // send the message to the server
+  socket.send(JSON.stringify(message));
+  messageInput.value = "";
+});
+
+    </script>
+  </body>
+</html>
