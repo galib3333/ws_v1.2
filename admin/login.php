@@ -22,9 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['userid'] = $user->user_id;
                 $_SESSION['email'] = $user->email;
                 $_SESSION['username'] = $user->username;
-                $_SESSION['contact_no'] = $user->contact_no;
+                
 
-                echo "<script>window.location.href = '../index.html';</script>";
+                echo "<script>window.location.href = '../index.php';</script>";
                 exit;
             } else {
                 echo "<script>alert('Incorrect email or password. Please try again.');</script>";
