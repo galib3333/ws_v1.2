@@ -92,30 +92,30 @@
     <script>
       let socket = new WebSocket("ws://192.168.0.102:8080");
 
-// handle incoming WebSocket messages
-socket.onmessage = function(event) {
-  let message = JSON.parse(event.data);
-  let messages = document.getElementById("messages");
-  messages.innerHTML += "<p><strong>" + message.name + ":</strong> " + message.message + "</p>";
-};
+      // handle incoming WebSocket messages
+      socket.onmessage = function(event) {
+        let message = JSON.parse(event.data);
+        let messages = document.getElementById("messages");
+        messages.innerHTML += "<p><strong>" + message.name + ":</strong> " + message.message + "</p>";
+      };
 
-// handle form submission
-let form = document.getElementById("message-form");
-form.addEventListener("submit", function(event) {
-  event.preventDefault();
-  let messageInput = document.getElementById("message-input");
-  let nameInput = document.getElementById("name-input"); // get the user name input field
-  let message = {
-    name: nameInput.value, // send the user name along with the message
-    message: messageInput.value
-  };
-  // add the user's own message to the chat
-  let messages = document.getElementById("messages");
-  messages.innerHTML += "<p><strong>You:</strong> " + message.message + "</p>";
-  // send the message to the server
-  socket.send(JSON.stringify(message));
-  messageInput.value = "";
-});
+      // handle form submission
+      let form = document.getElementById("message-form");
+      form.addEventListener("submit", function(event) {
+        event.preventDefault();
+        let messageInput = document.getElementById("message-input");
+        let nameInput = document.getElementById("name-input"); // get the user name input field
+        let message = {
+          name: nameInput.value, // send the user name along with the message
+          message: messageInput.value
+        };
+        // add the user's own message to the chat
+        let messages = document.getElementById("messages");
+        messages.innerHTML += "<p><strong>You:</strong> " + message.message + "</p>";
+        // send the message to the server
+        socket.send(JSON.stringify(message));
+        messageInput.value = "";
+      });
     </script>
   </body>
 </html>
