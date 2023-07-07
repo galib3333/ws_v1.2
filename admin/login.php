@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['username'] = $user->username;
                 $_SESSION['contact_no'] = $user->contact_no;
 
-                echo "<script>window.location.href = '../index.php';</script>";
+                echo "<script>window.location.href = '../index.html';</script>";
                 exit;
             } else {
                 echo "<script>alert('Incorrect email or password. Please try again.');</script>";
@@ -75,14 +75,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="card">
     <div class="card-body">
       <h3 class="card-title text-center">Login</h3>
-      <form method="POST" action="../index.html">
+      <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="email" placeholder="Enter email">
+          <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Enter password">
+          <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
         </div>
         <div class="d-grid">
           <button type="submit" class="btn btn-primary">Sign In</button>
