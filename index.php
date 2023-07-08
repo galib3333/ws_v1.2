@@ -1,7 +1,7 @@
 <?php
   session_start();
   if(!isset($_SESSION['userid'])){
-    echo "<script>window.location='login.php'</script>";
+    echo "<script>window.location='admin/login.php'</script>";
     exit;
   }
   ?>
